@@ -33,7 +33,23 @@ public class App {
         issues[1] = false;
 
         // add
-        deleteBook();
+        printLibMenu();
+    }
+
+    public static void viewAllBooks() {
+        System.out.println("                          Star Online Library");
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("sr.no  " + "bookid  " + " Authorname  " + "Publishdate  " + "Issued");
+
+        for (int j = 0; j < bookid.length; j++) {
+            if (bookid[j] <= -1)
+                return;
+
+            System.out.print(" | ");
+            System.out.print(bookid[j] + "   " + booktitle[j] + "   " + authorname[j] + "   " + publishdate[j]
+                    + "   " + issues[j] + "\n");
+        }
+
     }
 
     public static void add() {
@@ -108,8 +124,25 @@ public class App {
     }
 
     public static void printLibMenu() {
-        System.out.println(
-                "1. Add new book\n 2.Edit a book\n 3.Delete a book\n 4.View all books\n 5.Search a book by ID\n 6.See Profile");
+        int y = 0;
+        while (y != 7) {
+            System.out.println(
+                    "1. Add new book\n2. Edit a book\n3. Delete a book\n4. View all books\n5. Search a book by ID\n6. See Profile\n7. Exit");
+            System.out.print("Enter from 1-7: ");
+            y = input.nextInt();
+            if (y == 1) {
+                add();
+            } else if (y == 2) {
+                editBook();
+            } else if (y == 3) {
+                deleteBook();
+            } else if (y == 4) {
+                viewAllBooks();
+            } else if (y > 7 || y < 1) {
+                System.out.println("\n--> Invalid input, enter again <--");
+            }
+        }
+        System.out.println("Exiting menu");
     }
 
     public static void printStudentMenu() {

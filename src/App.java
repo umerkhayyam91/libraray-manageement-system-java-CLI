@@ -33,7 +33,7 @@ public class App {
         issues[1] = false;
 
         // add
-        add();
+        editBook();
     }
 
     public static void add() {
@@ -59,6 +59,28 @@ public class App {
             System.out.println("\n--> Your book has been added successfully!");
             displayBook(index);
         }
+    }
+
+    public static void editBook() {
+        System.out.println("\n--> Edit a book");
+
+        System.out.print("Enter ID from 1 to 15: ");
+        int id = input.nextInt();
+        int index = id - 1;
+        if (bookid[index] > -1) {
+            System.out.print("--> Editing book ID: " + id + "\n");
+            System.out.print("Enter Book title: ");
+            booktitle[index] = input.next();
+
+            System.out.print("Enter Author Name: ");
+            authorname[index] = input.next();
+
+            System.out.print("Enter Published Date (DD/MM/YYYY): ");
+            publishdate[index] = input.next();
+
+            System.out.println("\n--> Your book has been updated successfully!");
+            displayBook(index);
+        } 
     }
 
     public static void printLibMenu() {

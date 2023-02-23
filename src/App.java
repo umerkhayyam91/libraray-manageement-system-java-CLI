@@ -33,7 +33,7 @@ public class App {
         issues[1] = false;
 
         // add
-        editBook();
+        deleteBook();
     }
 
     public static void add() {
@@ -80,7 +80,31 @@ public class App {
 
             System.out.println("\n--> Your book has been updated successfully!");
             displayBook(index);
-        } 
+        } else {
+            System.out.println("--> ID does not exist!");
+        }
+
+    }
+
+    public static void deleteBook() {
+        System.out.println("\n--> Delete a book");
+
+        System.out.print("Enter ID from 1 to 15: ");
+        int id = input.nextInt();
+        int index = id - 1;
+        if (bookid[index] > -1) {
+            displayBook(index);
+
+            bookid[index] = -1;
+            booktitle[index] = "";
+            authorname[index] = "";
+            publishdate[index] = "";
+            issues[index] = false;
+            System.out.println("--> Your book has been deleted successfully!\n");
+
+        } else {
+            System.out.println("--> Invalid book ID");
+        }
     }
 
     public static void printLibMenu() {

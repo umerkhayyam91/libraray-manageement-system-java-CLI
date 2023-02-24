@@ -32,7 +32,7 @@ public class App {
         issues[0] = false;
         issues[1] = false;
 
-        viewBook();
+        issuebook();
 
     }
 
@@ -167,9 +167,28 @@ public class App {
 
     }
 
-    
-
     public static void issuebook() {
+        int index = -1;
+        while (index < 0 || index > 14 || bookid[index] == -1) {
+            System.out.println("Enter book ID you want to issue(1 - 15): ");
+            int id = input.nextInt();
+            index = id - 1;
+            if (index < 0 || index > 14) {
+                System.out.println("--> ID is out of range (1 - 15), please try again");
+
+            } else if (bookid[index] > -1) {
+                System.out.println("----------------");
+                System.out.println("ID: " + bookid[index]);
+                System.out.println("Book title: " + booktitle[index]);
+                System.out.println("Author name: " + authorname[index]);
+                System.out.println("Published Date" + publishdate[index]);
+                System.out.println("----------------");
+                issues[index] = true;
+                System.out.println("issue status: Issued");
+            } else {
+                System.out.println("No book available at this ID.");
+            }
+        }
 
     }
 

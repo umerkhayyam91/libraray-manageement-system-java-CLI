@@ -32,8 +32,7 @@ public class App {
         issues[0] = false;
         issues[1] = false;
 
-        issuebook();
-
+        returnBook();
     }
 
     public static void viewAllBooks() {
@@ -167,7 +166,7 @@ public class App {
 
     }
 
-    public static void issuebook() {
+    public static void issueBook() {
         int index = -1;
         while (index < 0 || index > 14 || bookid[index] == -1) {
             System.out.println("Enter book ID you want to issue(1 - 15): ");
@@ -183,6 +182,10 @@ public class App {
                 System.out.println("Author name: " + authorname[index]);
                 System.out.println("Published Date" + publishdate[index]);
                 System.out.println("----------------");
+                bookid[index] = -1;
+                booktitle[index] = "";
+                authorname[index] = "";
+                publishdate[index] = "";
                 issues[index] = true;
                 System.out.println("issue status: Issued");
             } else {
@@ -190,6 +193,34 @@ public class App {
             }
         }
 
+    }
+
+    public static void returnBook() {
+        int index = -1;
+        while (index < 0 || index > 14 || bookid[index] > -1) {
+            System.out.println("Enter book ID you want to return(1 - 15): ");
+            int id = input.nextInt();
+            index = id - 1;
+            if (index < 0 || index > 14) {
+                System.out.println("--> ID is out of range (1 - 15), please try again");
+
+            } else if (bookid[index] == -1) {
+                bookid[index] = index + 10;
+                System.out.print("Enter Book title: ");
+                booktitle[index] = input.next();
+
+                System.out.print("Enter Author Name: ");
+                authorname[index] = input.next();
+
+                System.out.print("Enter Published Date (DD/MM/YYYY): ");
+                publishdate[index] = input.next();
+
+                System.out.println("\n--> Your book has been updated successfully!");
+                displayBook(index);
+            } else {
+                System.out.println("The ID you entered is occupied, please enter again (1-15)");
+            }
+        }
     }
 
     public static void printLibMenu() {

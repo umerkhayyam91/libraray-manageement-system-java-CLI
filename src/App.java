@@ -32,7 +32,7 @@ public class App {
         issues[0] = false;
         issues[1] = false;
 
-        printLibMenu();
+        viewBook();
 
     }
 
@@ -123,8 +123,7 @@ public class App {
             index = id - 1;
             if (index > 14 || index < 0) {
                 System.out.println("--> ID is out of range (1 - 15)");
-            }
-           else if (bookid[index] > -1) {
+            } else if (bookid[index] > -1) {
                 displayBook(index);
 
                 bookid[index] = -1;
@@ -143,9 +142,37 @@ public class App {
     public static void searchById() {
         System.out.print("Enter Id: ");
         int id = input.nextInt();
-        int index = id -1;
+        int index = id - 1;
         displayBook(index);
     }
+
+    public static void viewBook() {
+
+        int index = -1;
+
+        while (index < 0 || index > 14 || bookid[index] < 0) {
+            System.out.print("Enter book ID: ");
+            int id = input.nextInt();
+            index = id - 1;
+            if (index < 0 || index > 14) {
+                System.out.println("ID is out of range.");
+            } else if (bookid[index] < 0) {
+                System.out.println("No book available at this ID.");
+            } else if (index > -1 && index < 15) {
+                displayBook(index);
+                break;
+            }
+
+        }
+
+    }
+
+    
+
+    public static void issuebook() {
+
+    }
+
     public static void printLibMenu() {
         int y = 0;
         while (y != 7) {
@@ -161,10 +188,9 @@ public class App {
                 deleteBook();
             } else if (y == 4) {
                 viewAllBooks();
-            } else if (y == 5){
+            } else if (y == 5) {
                 searchById();
-            }
-            else if (y > 7 || y < 1) {
+            } else if (y > 7 || y < 1) {
                 System.out.println("\n--> Invalid input, enter again <--");
             }
         }
@@ -173,7 +199,7 @@ public class App {
 
     public static void printStudentMenu() {
         System.out.println(
-                "1. View all book\n2. Issue a book\n3.Return a book\n4. Search a book\n5. See Profile\n6. Exit");
+                "1. View a book\n2. Issue a book\n3. Return a book\n4. Search a book\n5. See Profile\n6. Exit");
         System.out.println("Enter from 1-6: ");
         int z = input.nextInt();
         while (z != 6) {

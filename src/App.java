@@ -32,8 +32,8 @@ public class App {
         issues[0] = false;
         issues[1] = false;
 
-        // add
         printLibMenu();
+
     }
 
     public static void viewAllBooks() {
@@ -55,49 +55,60 @@ public class App {
     public static void add() {
         System.out.println("\n--> Add new book");
 
-        System.out.print("Enter ID from 3 to 15: ");
-        int id = input.nextInt();
-        int index = id - 1;
+        int index = -1;
 
-        if (bookid[index] > -1) {
-            System.out.println("--> ID has already been taken, Please try again with valid ID!!");
-        } else {
-            bookid[index] = id;
-            System.out.print("Enter Book title: ");
-            booktitle[index] = input.next();
+        while (index < 0 || index > 14 || bookid[index] > -1) {
+            System.out.print("Enter ID from 1 to 15: ");
+            int id = input.nextInt();
+            index = id - 1;
+            if (index > 14 || index < 0) {
+                System.out.println("--> ID is out of range (1 - 15)");
+            } else if (bookid[index] > -1) {
+                System.out.println("--> ID has already been taken, Please try again with valid ID!!");
+            } else {
+                bookid[index] = id;
+                System.out.print("Enter Book title: ");
+                booktitle[index] = input.next();
 
-            System.out.print("Enter Author Name: ");
-            authorname[index] = input.next();
+                System.out.print("Enter Author Name: ");
+                authorname[index] = input.next();
 
-            System.out.print("Enter Published Date (DD/MM/YYYY): ");
-            publishdate[index] = input.next();
+                System.out.print("Enter Published Date (DD/MM/YYYY): ");
+                publishdate[index] = input.next();
 
-            System.out.println("\n--> Your book has been added successfully!");
-            displayBook(index);
+                System.out.println("\n--> Your book has been added successfully!");
+                displayBook(index);
+                break;
+            }
         }
     }
 
     public static void editBook() {
         System.out.println("\n--> Edit a book");
+        int index = -1;
+        while (index > 14 || index < 0 || bookid[index] > -1) {
+            System.out.print("Enter ID from 1 to 15: ");
+            int id = input.nextInt();
+            index = id - 1;
+            if (index > 14 || index < 0) {
+                System.out.println("--> ID is out of range (1 - 15)");
+            } else if (bookid[index] > -1) {
+                System.out.print("--> Editing book ID: " + id + "\n");
+                System.out.print("Enter Book title: ");
+                booktitle[index] = input.next();
 
-        System.out.print("Enter ID from 1 to 15: ");
-        int id = input.nextInt();
-        int index = id - 1;
-        if (bookid[index] > -1) {
-            System.out.print("--> Editing book ID: " + id + "\n");
-            System.out.print("Enter Book title: ");
-            booktitle[index] = input.next();
+                System.out.print("Enter Author Name: ");
+                authorname[index] = input.next();
 
-            System.out.print("Enter Author Name: ");
-            authorname[index] = input.next();
+                System.out.print("Enter Published Date (DD/MM/YYYY): ");
+                publishdate[index] = input.next();
 
-            System.out.print("Enter Published Date (DD/MM/YYYY): ");
-            publishdate[index] = input.next();
-
-            System.out.println("\n--> Your book has been updated successfully!");
-            displayBook(index);
-        } else {
-            System.out.println("--> ID does not exist!");
+                System.out.println("\n--> Your book has been updated successfully!");
+                displayBook(index);
+                break;
+            } else {
+                System.out.println("--> ID does not exist!|n");
+            }
         }
 
     }
@@ -105,24 +116,36 @@ public class App {
     public static void deleteBook() {
         System.out.println("\n--> Delete a book");
 
-        System.out.print("Enter ID from 1 to 15: ");
-        int id = input.nextInt();
-        int index = id - 1;
-        if (bookid[index] > -1) {
-            displayBook(index);
+        int index = -1;
+        while (index > 14 || index < 0 || bookid[index] > -1) {
+            System.out.print("Enter ID from 1 to 15: ");
+            int id = input.nextInt();
+            index = id - 1;
+            if (index > 14 || index < 0) {
+                System.out.println("--> ID is out of range (1 - 15)");
+            }
+           else if (bookid[index] > -1) {
+                displayBook(index);
 
-            bookid[index] = -1;
-            booktitle[index] = "";
-            authorname[index] = "";
-            publishdate[index] = "";
-            issues[index] = false;
-            System.out.println("--> Your book has been deleted successfully!\n");
+                bookid[index] = -1;
+                booktitle[index] = "";
+                authorname[index] = "";
+                publishdate[index] = "";
+                issues[index] = false;
+                System.out.println("--> Your book has been deleted successfully!\n");
 
-        } else {
-            System.out.println("--> Invalid book ID");
+            } else
+                System.out.println("--> Invalid book ID");
         }
+
     }
 
+    public static void searchById() {
+        System.out.print("Enter Id: ");
+        int id = input.nextInt();
+        int index = id -1;
+        displayBook(index);
+    }
     public static void printLibMenu() {
         int y = 0;
         while (y != 7) {
@@ -138,7 +161,10 @@ public class App {
                 deleteBook();
             } else if (y == 4) {
                 viewAllBooks();
-            } else if (y > 7 || y < 1) {
+            } else if (y == 5){
+                searchById();
+            }
+            else if (y > 7 || y < 1) {
                 System.out.println("\n--> Invalid input, enter again <--");
             }
         }
@@ -146,7 +172,15 @@ public class App {
     }
 
     public static void printStudentMenu() {
-        System.out.println("1. View a book\n 2. Issue a book\n 3.Return a book\n 4. Search a book\n 5. See Profile");
+        System.out.println(
+                "1. View all book\n2. Issue a book\n3.Return a book\n4. Search a book\n5. See Profile\n6. Exit");
+        System.out.println("Enter from 1-6: ");
+        int z = input.nextInt();
+        while (z != 6) {
+            if (z == 1) {
+                viewAllBooks();
+            }
+        }
     }
 
     public static void displayBook(int i) {

@@ -32,7 +32,7 @@ public class App {
         issues[0] = false;
         issues[1] = false;
 
-        returnBook();
+        searchBook();
     }
 
     public static void viewAllBooks() {
@@ -221,6 +221,23 @@ public class App {
                 System.out.println("The ID you entered is occupied, please enter again (1-15)");
             }
         }
+    }
+
+    public static void searchBook() {
+        int index = -1;
+        while (index < 0 || index > 14 || bookid[index] == -1) {
+            System.out.println("Enter book ID you want to search (1 - 15): ");
+            int id = input.nextInt();
+            index = id - 1;
+            if (index < 0 || index > 14) {
+                System.out.println("--> ID is out of range (1 - 15), please try again");
+
+            } else if (bookid[index] > -1){
+                displayBook(index);
+            } else{
+                System.out.println("No book available at this ID.");
+            }
+    }
     }
 
     public static void printLibMenu() {

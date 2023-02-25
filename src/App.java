@@ -32,8 +32,26 @@ public class App {
         issues[0] = false;
         issues[1] = false;
 
-        searchBook();
+        userRoleMenu();
     }
+
+public static void userRoleMenu() {
+    int i = -1;
+    while(i<1 || i>2){
+        System.out.println("--->Welcome to user menu<---");
+        System.out.println("Please select from (1-2)");
+        System.out.println("1. Student\n2. Librarian");
+        System.out.print("Enter value:");
+        int y = input.nextInt();
+        if(y<1 || y>2){
+            System.out.println("Out of range, please enter 1 or 2.");
+        } else if(y == 1){
+            printStudentMenu();
+        } else{
+            printLibMenu();
+        }
+    }
+}
 
     public static void viewAllBooks() {
         System.out.println("                          Star Online Library");
@@ -232,19 +250,22 @@ public class App {
             if (index < 0 || index > 14) {
                 System.out.println("--> ID is out of range (1 - 15), please try again");
 
-            } else if (bookid[index] > -1){
+            } else if (bookid[index] > -1) {
                 displayBook(index);
-            } else{
+            } else {
                 System.out.println("No book available at this ID.");
             }
-    }
+        }
     }
 
     public static void printLibMenu() {
         int y = 0;
         while (y != 7) {
+            System.out.println();
+        System.out.println("**** Student Menu 1 ****");
+            System.out.println("***************************");
             System.out.println(
-                    "1. Add new book\n2. Edit a book\n3. Delete a book\n4. View all books\n5. Search a book by ID\n6. See Profile\n7. Exit");
+                    "1. Add new book\n2. Edit a book\n3. Delete a book\n4. View all books\n5. Search a book by ID\n7. Exit");
             System.out.print("Enter from 1-7: ");
             y = input.nextInt();
             if (y == 1) {
@@ -265,15 +286,26 @@ public class App {
     }
 
     public static void printStudentMenu() {
+        System.out.println();
+        System.out.println("**** Student Menu 1 ****");
         System.out.println(
-                "1. View a book\n2. Issue a book\n3. Return a book\n4. Search a book\n5. See Profile\n6. Exit");
-        System.out.println("Enter from 1-6: ");
-        int z = input.nextInt();
-        while (z != 6) {
-            if (z == 1) {
-                viewAllBooks();
+                "1. View a book\n2. Issue a book\n3. Return a book\n4. Search a book\n6. Exit\n ------------------");
+        System.out.print("Enter from 1-6: ");
+        int y = input.nextInt();
+        while (y != 6) {
+            if (y == 1) {
+                viewBook();
+            } else if (y == 2) {
+                issueBook();
+            } else if (y == 3) {
+                returnBook();
+            } else if (y == 4) {
+                searchBook();
+            }  else if (y > 7 || y < 1) {
+                System.out.println("\n--> Invalid input, enter again <--");
             }
         }
+        System.out.println("Exiting menu");
     }
 
     public static void displayBook(int i) {
